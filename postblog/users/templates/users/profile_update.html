@@ -1,0 +1,19 @@
+{% extends 'blog/base.html' %}
+{% load crispy_forms_tags %}
+{% load tailwind_filters %}
+
+{% block content %}
+<div class="content-section mx-auto w-full max-w-md p-4">
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="border-b border-gray-400 mb-4">
+            <legend class="text-lg font-semibold mb-2">Update Profile</legend>
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="px-4 py-2 border border-blue-500 rounded text-blue-500 hover:bg-blue-500 hover:text-white transition duration-300" type="submit">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+</head>
+    
+<body>
+
+    {% include 'blog/header.html' %}
+    
+    <main role="main" class="py-3 px-9  bg-gray-400">
+        <div class="flex flex-col md:flex-row ">
+          <div class="md:w-2/3">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="bg-{{ message.tags }} text-white px-4 py-2 my-4 rounded shadow-md">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+            
+            <div class="col-span-8  ">
+              {% block content %} {% endblock %}
+            </div>
+          </div>
+          <div class="md:w-1/4 mt-2 md:ml-4 ">
+            <div class="bg-white p-4 rounded shadow-md">
+              <a href="" class="flex items-center text-blue-500 hover:underline">
+                <span class="font-semibold text-xl" id="gist-btn">Latest Gist</span>
+              </a>
+              <div class="list-group list-group-flush border-b">
+                <a href="#" class="list-group-item list-group-item-action py-2">
+                  <div class="flex justify-between">
+                    <strong class="mb-1">Seriously, Stop Trying to Teach Toddlers How to Code...By Desphixs</strong>
+                    <small>Wed</small>
+                  </div>
+                  <div class="mb-2 text-sm">AS A BABY nerd, I was obsessed with Hackers. The 1995 cult movie...</div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2">
+                  <div class="flex justify-between">
+                    <strong class="mb-1">It's not a bug - It's a feature.. by Desphixs</strong>
+                    <small class="text-muted">Tues</small>
+                  </div>
+                  <div class="mb-2 text-sm">When it comes to coding, everything works like a miracle, let me use that word...hahaha</div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2">
+                  <div class="flex justify-between">
+                    <strong class="mb-1">I wanted to be a great programmer but...by Desphixs</strong>
+                    <small class="text-muted">Mon</small>
+                  </div>
+                  <div class="mb-2 text-sm">In my family trait, nobody knows anything about computers and I wanted to be the greatest computer scientist ever and...</div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="mt-8 border-t pt-4">
+          <ul class="flex justify-center border-b mb-4">
+            <li class="mx-2"><a href="#" class="text-blue-500 hover:underline">Home</a></li>
+            <li class="mx-2"><a href="#" class="text-blue-500 hover:underline">Features</a></li>
+            <li class="mx-2"><a href="#" class="text-blue-500 hover:underline">About</a></li>
+          </ul>
+        </footer>
+      </main>
+      
+   
+
+  
+</body>
+</html>

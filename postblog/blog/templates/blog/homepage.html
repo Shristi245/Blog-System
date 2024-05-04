@@ -1,0 +1,66 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <h1 class="text-4xl">Blog Home</h1>
+    <hr>
+
+    
+    {% for posts in post %}
+        <article class=" bg-white p-4 rounded-md shadow-md mb-4">
+            <div class=" flex items-center ">
+                <img class="rounded-full w-12 h-12" src="{{ posts.author.profile.image.url }}" alt="">
+                <div class=" ml-4">
+                    <a class="text-blue-500" href="#">{{ posts.author }}</a>
+                    <small class="text-gray-400">{{ posts.date_posted }}</small>
+                </div>
+            </div>
+            
+            <h2 class="text-2xl font-bold mt-2">
+                <a class="text-blue-700 hover:underline" href="{% url "blog" posts.id %}">{{ posts.title }}</a>
+            </h2>
+
+            <div id= "content">
+            <p class="mt-2" >{{ posts.content }}</p>
+            <button onclick="toggleFunc()" id="button"
+            class="mt-3 px-5 py-2 bg-rose-500 text-white duration-300 hover:bg-rose-700">Read
+            more</button>
+            </div>
+
+            {% comment %} <script>
+                function toggleFunc() {
+                  var content = document.getElementById("postContent");
+                  var button = document.getElementById("button");
+              
+                  if (content.style.display === "none" || content.style.display === "") {
+                    content.style.display = "block";
+                    button.textContent = "Read less";
+                  } else {
+                    content.style.display = "none";
+                    button.textContent = "Read more";
+                  }
+                }
+              </script> {% endcomment %}
+        </article>
+    {% endfor %}
+
+    <div class="pagination">
+      <span class="step-links">
+          {% if posts.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ posts.previous_page_number }}">previous</a>
+          {% endif %}
+  
+          <span class="current-page">{{ posts.number }} of {{ posts.paginator.num_pages }}.</span>
+  
+          {% if posts.has_next %}
+              <a href="?page={{ posts.next_page_number }}">next</a>
+              <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+  </div>
+
+
+
+{% endblock %}

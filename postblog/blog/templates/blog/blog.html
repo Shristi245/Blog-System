@@ -1,0 +1,52 @@
+{% extends 'blog/base.html' %}
+
+
+
+{% block content %}
+
+    {% for p in posts %}
+    <h1 class="text-3xl font-semibold text-red-800">{{p.title}}</h1>
+    <h1>{{p.content}}</h1>
+    <h1>{{p.date_posted}}</h1>
+    <h1>{{p.author}}</h1>
+
+    <hr>
+
+
+    <h2 class="text-2xl font-semibold mb-4">Comments</h2>
+
+{% for comment in post.comments.all %}
+    <article class="bg-white p-4 rounded-lg shadow-md mb-4">
+        <div class="flex items-center mb-2">
+            <strong class="text-lg mr-2">{{ comment.name }}</strong>
+            <small class="text-gray-500">{{ comment.date_added }}</small>
+        </div>
+        <p class="text-gray-800">{{ comment.body }}</p>
+    </article>
+{% empty %}
+    <div class="bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-900 px-4 py-3 shadow-md mb-4">
+        <p>No comments yet!</p>
+    </div>
+{% endfor %}
+
+<hr class="my-6">
+
+<h2 class="text-2xl font-semibold mb-4">Add comment</h2>
+
+<form method="POST" action="">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <div class="mt-4">
+        <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg">
+            Submit
+        </button>
+    </div>
+</form>
+
+
+
+    {% endfor %}
+    
+{% endblock %}
